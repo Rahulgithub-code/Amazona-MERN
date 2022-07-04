@@ -35,10 +35,18 @@
    4. use effect hook
    5. use reducer hook
 9. Manage state by reducer hook
+
    1. define reducer
    2. update fetch data
    3. get start from useReducer
+
 10. Add bootstrap UI framework
-11. npm install react-bootstrap bootstrap
-12. update App.js
-13. npm install react-router-bootstrap
+
+    1. npm install react-bootstrap bootstrap
+    2. update App.js
+    3. npm install react-router-bootstrap
+
+11. Create product and rating component
+    1. create rating component
+    2. create product component
+    3. use rating component in product component
