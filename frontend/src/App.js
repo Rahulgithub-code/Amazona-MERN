@@ -1,12 +1,23 @@
 import './App.css';
-import React from 'react';
+import React, { useContext } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
-import { Container, Navbar, NavbarBrand } from 'reactstrap';
+import {
+  Badge,
+  CardText,
+  Container,
+  Nav,
+  Navbar,
+  NavbarBrand,
+} from 'reactstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import { Link } from 'react-router-dom';
+import { Store } from './Store';
 
 function App() {
+  const { state } = useContext(Store);
+  const { cart } = state;
   return (
     <BrowserRouter>
       <div className="d-flex flex-column site-container">
@@ -15,6 +26,14 @@ function App() {
             <LinkContainer to="/">
               <NavbarBrand> Amazona </NavbarBrand>
             </LinkContainer>
+            <Nav className="me-auto">
+              <Link to="/cart" className="nav-link">
+                Cart
+                <Badge pill color="danger">
+                  {cart.cartItems.length > 0 ? cart.cartItems.length : 0}
+                </Badge>
+              </Link>
+            </Nav>
           </Container>
         </Navbar>
         <main>

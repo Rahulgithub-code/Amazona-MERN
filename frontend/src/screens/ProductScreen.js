@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useEffect, useReducer } from 'react';
+import { useContext, useEffect, useReducer } from 'react';
 import { useParams } from 'react-router-dom';
 import {
   Row,
@@ -14,6 +14,7 @@ import {
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import Rating from '../components/Rating';
+import { Store } from '../Store';
 import { getError } from '../utils';
 
 const reducer = (state, action) => {
@@ -50,6 +51,14 @@ function ProductScreen() {
     };
     fetchProduct();
   }, [slug]);
+
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const addToCartHandler = () => {
+    ctxDispatch({
+      type: 'CART_ADD_ITEM',
+      payload: { ...product, quantity: 1 },
+    });
+  };
   return loading ? (
     <LoadingBox />
   ) : error ? (
@@ -104,7 +113,9 @@ function ProductScreen() {
                 {product.countInStock > 0 && (
                   <ListGroupItem>
                     <div className="d-grid">
-                      <Button color="primary">Add to Cart</Button>
+                      <Button onClick={addToCartHandler} color="primary">
+                        Add to Cart
+                      </Button>
                     </div>
                   </ListGroupItem>
                 )}
